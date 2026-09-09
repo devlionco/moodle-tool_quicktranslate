@@ -1,0 +1,67 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template tool_quicktranslate/translation_form
+
+    The form shown in the translation modal: one textarea per installed language.
+    The context is the return value of tool_quicktranslate_get_translated_string.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * data-id on the form - string reference as identifier/component
+    * data-lang on each textarea - language the value belongs to
+
+    Context variables required for this template:
+    * currentlang, identifier, component
+    * text - list of {lang, langname, string, original}
+
+    Example context (json):
+    {
+        "currentlang": "en",
+        "identifier": "exampletext",
+        "component": "tool_quicktranslate",
+        "text": [
+            {"lang": "en", "langname": "English (en)", "string": "some English text", "original": "some English text"},
+            {"lang": "he", "langname": "Hebrew (he)", "string": "\u05e7\u05e6\u05ea \u05d8\u05e7\u05e1\u05d8", "original": ""}
+        ]
+    }
+}}
+
+<div class="translates-wrapper">
+    <h5 class="translates-langs">
+        {{#str}}availablelangs, tool_quicktranslate{{/str}} {{#text}} {{lang}}<span class="lang-separator">, </span>{{/text}}
+    </h5>
+    {{#identifier}}
+        <h4 class="identifier mb-4">
+            {{identifier}}/{{component}}
+        </h4>
+    {{/identifier}}
+    <form id="translates_form" data-id="{{identifier}}/{{component}}" data-current="{{currentlang}}">
+        {{#text}}
+            <div class="mb-3">
+                <label class="form-label fw-bold" for="quicktranslate_{{lang}}_{{uniqid}}">{{langname}}</label>
+                <textarea class="form-control" data-lang="{{lang}}" name="{{lang}}"
+                          id="quicktranslate_{{lang}}_{{uniqid}}" rows="3">{{string}}</textarea>
+                <div class="form-text" id="quicktranslate_original_{{lang}}_{{uniqid}}">
+                    {{#str}}original, tool_quicktranslate{{/str}} {{original}}
+                </div>
+            </div>
+        {{/text}}
+    </form>
+</div>

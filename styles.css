@@ -1,0 +1,109 @@
+/* Quick translate sidebar. Plugin CSS is served through theme/styles.php, which also runs it
+   through rtlcss, so physical properties below are flipped automatically on RTL languages. */
+body.editing {
+    /* One source of truth: the panel width, the toggler offset and the page shift all read it. */
+    --ipt-width: min(30vw, 420px);
+    /* Boost publishes its navbar height on :root; 60px is the fallback if a theme does not. */
+    --ipt-top: var(--navbar-height, 60px);
+}
+
+body.editing #quicktranslate_menu {
+    display: none;
+}
+
+body.editing.quicktranslate-menu-shown #quicktranslate_menu {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    top: var(--ipt-top);
+    width: var(--ipt-width);
+    height: calc(100vh - var(--ipt-top));
+    /* Above the theme drawers (1035), below the modal backdrop (1050). */
+    z-index: 1036;
+}
+
+body.editing #quicktranslate_menu .quicktranslate-inner {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+}
+
+/* Whatever height is left over, rather than a fixed viewport fraction that clips the last row. */
+body.editing #quicktranslate_menu .quicktranslate-strings-wrapper {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+/* A floating action button in the bottom corner. An earlier 8rem offset achieved nothing: the
+   theme drawers cover the whole left edge, so only the z-index below keeps this reachable. */
+body.editing #quicktranslate_menu_toggler {
+    position: fixed;
+    left: 1rem;
+    bottom: 1rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    /* Above the theme drawers, which are 1035. */
+    z-index: 1036;
+}
+
+/* The open panel carries its own close button. This one used to move outside the panel edge to
+   become it, which read as a stray circle over the page. */
+body.editing.quicktranslate-menu-shown #quicktranslate_menu_toggler {
+    display: none;
+}
+
+/* Not .text-primary: themes redefine it for text on a brand background, and boost_union sets it
+   to white, which made these headings invisible on the panel's light surface. */
+body.editing #quicktranslate_menu .quicktranslate-header {
+    border-bottom: 1px solid var(--bs-border-color, #dee2e6);
+    padding-bottom: .75rem;
+}
+
+body.editing .quicktranslate-title,
+body.editing .translates-wrapper .translates-langs,
+body.editing .translates-wrapper .identifier {
+    color: var(--bs-primary, #0f6cbf);
+}
+
+/* Only shift the page where drawers sit beside the content. Narrower than that, shifting by the
+   panel width would push the content out of sight, so the panel covers it instead. */
+@media (min-width: 992px) {
+    body.editing.quicktranslate-menu-shown #page {
+        padding-left: var(--ipt-width);
+    }
+}
+
+@media (max-width: 991.98px) {
+    body.editing.quicktranslate-menu-shown #quicktranslate_menu {
+        width: 100%;
+    }
+}
+
+body.editing .translates-wrapper .lang-separator:last-of-type {
+    display: none;
+}
+
+/* The rows are buttons so they are focusable and announced as actions, but they must read as
+   list rows, not as a stack of Bootstrap links. */
+body.editing #quicktranslate_menu .quicktranslate-item {
+    color: inherit;
+    text-decoration: none;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+body.editing #quicktranslate_menu .quicktranslate-item:hover,
+body.editing #quicktranslate_menu .quicktranslate-item:focus-visible {
+    background-color: var(--bs-secondary-bg, #e9ecef);
+}
+
+body.editing #quicktranslate_menu .quicktranslate-item .identifier {
+    font-size: .875em;
+    opacity: .75;
+}

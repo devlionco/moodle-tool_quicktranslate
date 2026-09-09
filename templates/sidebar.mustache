@@ -1,0 +1,92 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template tool_quicktranslate/sidebar
+
+    The quick translate sidebar, injected into the page footer for a site administrator
+    in edit mode. Rendered from tool_quicktranslate\output\sidebar.
+
+    Data attributes required for JS:
+    * data-action="dismiss" - hides the status region again
+
+    Ids required for JS:
+    * quicktranslate_menu_toggler - opens the panel
+    * quicktranslate_close - closes it from inside the panel
+
+    Context variables required for this template:
+    * stringsjson - the strings to offer, as json, consumed once by the javascript
+
+    Example context (json):
+    {
+        "stringsjson": "[{\"identifier\":\"yes\",\"component\":\"core\",\"text\":\"Yes\"}]"
+    }
+}}
+
+<button id="quicktranslate_menu_toggler" type="button" aria-expanded="false"
+        aria-controls="quicktranslate_menu"
+        class="btn bg-primary p-2 rounded-circle text-white border-0"
+        title="{{#str}}togglemenu, tool_quicktranslate{{/str}}">
+    <i class="fa fa-language" aria-hidden="true"></i>
+    <span class="visually-hidden">{{#str}}togglemenu, tool_quicktranslate{{/str}}</span>
+</button>
+<div id="quicktranslate_menu" class="bg-light border border-primary rounded-end">
+    <div class="quicktranslate-header d-flex align-items-start gap-2 px-3 pt-3">
+        <h3 class="quicktranslate-title flex-grow-1 mb-0">
+            {{#str}}searchandtranslatethewords, tool_quicktranslate{{/str}}
+        </h3>
+        {{! Inside the panel, the way core drawers do it. The floating toggle used to jump
+            outside the panel edge to become this button, leaving a detached circle. }}
+        <button id="quicktranslate_close" type="button" class="btn-close flex-shrink-0"
+                aria-label="{{#str}}closebuttontitle{{/str}}"></button>
+    </div>
+    <div class="quicktranslate-inner p-3">
+        <div class="quicktranslate-search-wrapper input-group mb-3">
+            <input id="quicktranslate_search" type="text" class="form-control"
+                   placeholder="{{#str}}search, tool_quicktranslate{{/str}}"
+                   aria-label="{{#str}}search, tool_quicktranslate{{/str}}">
+            <button id="quicktranslate_clear_search_btn" type="button"
+                    aria-label="{{#str}}clearsearch, tool_quicktranslate{{/str}}"
+                    class="btn btn-outline-primary align-items-center justify-content-center d-none">
+                <i class="fa fa-xmark" aria-hidden="true"></i>
+            </button>
+            <button id="quicktranslate_refresh_btn" type="button"
+                    aria-label="{{#str}}refresh, tool_quicktranslate{{/str}}"
+                    data-bs-toggle="tooltip" data-bs-placement="top"
+                    title="{{#str}}refresh, tool_quicktranslate{{/str}}"
+                    class="refresh-btn btn btn-outline-secondary align-items-center justify-content-center ms-2">
+                <i class="fa fa-arrows-rotate" aria-hidden="true"></i>
+            </button>
+        </div>
+        <div id="quicktranslate_status" class="alert alert-success alert-dismissible py-2 mb-3 d-none"
+             role="status">
+            <span id="quicktranslate_status_text"></span>
+            <button type="button" class="btn-close" data-action="dismiss"
+                    aria-label="{{#str}}closebuttontitle{{/str}}"></button>
+        </div>
+        <div class="quicktranslate-strings-wrapper">
+            <ul class="list-group" id="quicktranslate_strings_list"></ul>
+        </div>
+    </div>
+</div>
+{{! The rows are built from this on first open: rendering them up front made the sidebar the
+    majority of the page's DOM for everybody, opened or not. }}
+<script type="application/json" id="quicktranslate_data">{{{stringsjson}}}</script>
+{{#js}}
+    require(['tool_quicktranslate/main'], function(main) {
+        main.init();
+    });
+{{/js}}
