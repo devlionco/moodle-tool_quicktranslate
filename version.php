@@ -26,6 +26,6 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'tool_quicktranslate';
 $plugin->release = '3.0';
-$plugin->version = 2026090707;
+$plugin->version = 2026092300;
 $plugin->requires = 2026042000;
 $plugin->maturity = MATURITY_STABLE;
