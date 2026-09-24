@@ -43,7 +43,6 @@ use Behat\Mink\Exception\ExpectationException;
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class behat_tool_quicktranslate extends behat_base {
-
     /**
      * Discards every local language customisation before each of this plugin's scenarios.
      *

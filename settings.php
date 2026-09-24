@@ -26,7 +26,6 @@
 defined('MOODLE_INTERNAL') || die();
 
 if ($hassiteconfig) {
-
     $settings = new admin_settingpage(
         'tool_quicktranslate',
         get_string('pluginname', 'tool_quicktranslate')
@@ -40,5 +39,4 @@ if ($hassiteconfig) {
     ));
 
     $ADMIN->add('tools', $settings);
-
 }

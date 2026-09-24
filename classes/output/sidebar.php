@@ -32,8 +32,7 @@ use tool_quicktranslate\local\string_id;
  * @copyright  2024 Devlion <info@devlion.co>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class sidebar implements renderable, named_templatable {
-
+class sidebar implements named_templatable, renderable {
     /**
      * Strings the sidebar's own templates resolve, as identifier => component.
      *
@@ -58,8 +57,9 @@ class sidebar implements renderable, named_templatable {
     ];
 
     /**
-     * @param array<int, array{identifier: string, component: string, text: string}> $strings
-     *      Strings to offer for translation.
+     * Creates the sidebar.
+     *
+     * @param array[] $strings Strings to offer for translation, each with identifier, component and text keys.
      */
     public function __construct(
         /** @var array Strings to offer for translation. */

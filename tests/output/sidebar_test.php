@@ -27,7 +27,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
  */
 #[CoversClass(\tool_quicktranslate\output\sidebar::class)]
 final class sidebar_test extends \advanced_testcase {
-
     /**
      * Returns the identifier/component references the sidebar would offer.
      *
@@ -81,7 +80,7 @@ final class sidebar_test extends \advanced_testcase {
         $this->resetAfterTest();
         $PAGE->set_url('/');
 
-        // $OUTPUT is still the bootstrap renderer until the page has a theme, so ask $PAGE.
+        // The global $OUTPUT is still the bootstrap renderer until the page has a theme, so ask $PAGE.
         $html = $PAGE->get_renderer('core')->render(new sidebar([
             ['identifier' => 'yes', 'component' => 'core', 'text' => 'Yes'],
         ]));

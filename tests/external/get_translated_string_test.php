@@ -30,7 +30,6 @@ use tool_quicktranslate\local\string_id;
  */
 #[CoversClass(\tool_quicktranslate\external\get_translated_string::class)]
 final class get_translated_string_test extends \core_external\tests\externallib_testcase {
-
     /**
      * Calls the function and validates the result against its own declared structure.
      *

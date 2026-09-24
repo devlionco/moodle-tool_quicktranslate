@@ -28,7 +28,6 @@ use PHPUnit\Framework\Attributes\DataProvider;
  */
 #[CoversClass(\tool_quicktranslate\local\string_id::class)]
 final class string_id_test extends \basic_testcase {
-
     /**
      * References are parsed into an identifier and a component.
      *

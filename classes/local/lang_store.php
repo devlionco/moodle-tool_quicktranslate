@@ -27,7 +27,6 @@ namespace tool_quicktranslate\local;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class lang_store {
-
     /** @var int Seconds to wait for another request to finish writing the same file. */
     protected const LOCK_TIMEOUT = 10;
 
@@ -35,6 +34,8 @@ class lang_store {
     protected string $root;
 
     /**
+     * Creates the store.
+     *
      * @param string|null $root Language root; defaults to $CFG->langlocalroot.
      */
     public function __construct(?string $root = null) {
@@ -198,9 +199,9 @@ class lang_store {
     /**
      * Rewrites a component's local language file with the given set of strings.
      *
-     * @param string $component
-     * @param string $lang
-     * @param array<string, string> $strings
+     * @param string $component Frankenstyle component.
+     * @param string $lang Language code.
+     * @param string[] $strings Strings keyed by identifier.
      * @throws \moodle_exception When the file cannot be written.
      */
     protected function write(string $component, string $lang, array $strings): void {

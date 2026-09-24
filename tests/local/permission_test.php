@@ -27,7 +27,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
  */
 #[CoversClass(\tool_quicktranslate\local\permission::class)]
 final class permission_test extends \advanced_testcase {
-
     /**
      * Only an enabled tool and a site administrator in edit mode start the collection.
      */

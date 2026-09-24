@@ -30,7 +30,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
  */
 #[CoversClass(\tool_quicktranslate\collecting_string_manager::class)]
 final class collecting_string_manager_test extends \advanced_testcase {
-
     /**
      * Builds a manager configured exactly the way get_string_manager() would build it.
      *

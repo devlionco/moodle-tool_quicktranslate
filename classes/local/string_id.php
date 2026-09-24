@@ -28,7 +28,6 @@ namespace tool_quicktranslate\local;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 final class string_id {
-
     /** @var string The string identifier, e.g. "yes". */
     public readonly string $identifier;
 
@@ -36,6 +35,8 @@ final class string_id {
     public readonly string $component;
 
     /**
+     * Creates a validated string id.
+     *
      * @param string $identifier String identifier within the component.
      * @param string $component Frankenstyle component; '' and 'moodle' both mean core.
      * @throws \invalid_parameter_exception When either part is not a valid Moodle name.
@@ -51,9 +52,11 @@ final class string_id {
 
         // PARAM_STRINGID permits slashes and dots, so alone it accepts 'yes/../..'. No real
         // identifier has a '..' segment.
-        if ($identifier === ''
+        if (
+            $identifier === ''
                 || str_contains($identifier, '..')
-                || $identifier !== clean_param($identifier, PARAM_STRINGID)) {
+                || $identifier !== clean_param($identifier, PARAM_STRINGID)
+        ) {
             throw new \invalid_parameter_exception('Invalid string identifier: ' . s($identifier));
         }
         if ($component !== clean_param($component, PARAM_COMPONENT)) {

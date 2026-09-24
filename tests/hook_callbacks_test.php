@@ -32,7 +32,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
  */
 #[CoversClass(\tool_quicktranslate\hook_callbacks::class)]
 final class hook_callbacks_test extends \advanced_testcase {
-
     /**
      * Puts the current request in the state the sidebar requires.
      */

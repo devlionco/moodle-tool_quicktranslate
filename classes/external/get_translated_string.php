@@ -34,7 +34,6 @@ use tool_quicktranslate\local\string_id;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class get_translated_string extends external_api {
-
     /**
      * Describes the parameters.
      *

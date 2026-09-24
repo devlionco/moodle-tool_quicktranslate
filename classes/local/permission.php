@@ -27,7 +27,6 @@ namespace tool_quicktranslate\local;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 final class permission {
-
     /** @var string Capability required to read translations. */
     public const CAP_VIEW = 'tool/quicktranslate:view';
 

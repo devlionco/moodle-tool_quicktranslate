@@ -30,7 +30,6 @@ use tool_quicktranslate\local\string_id;
  */
 #[CoversClass(\tool_quicktranslate\external\set_translated_string::class)]
 final class set_translated_string_test extends \core_external\tests\externallib_testcase {
-
     /** @var string The value the English language pack ships for yes/core. */
     private string $original;
 

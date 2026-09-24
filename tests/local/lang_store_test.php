@@ -30,7 +30,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
  */
 #[CoversClass(\tool_quicktranslate\local\lang_store::class)]
 final class lang_store_test extends \advanced_testcase {
-
     /** @var string Throwaway language root. */
     private string $root;
 
