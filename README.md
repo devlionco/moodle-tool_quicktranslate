@@ -31,11 +31,16 @@ or delete `moodledata/lang/*_local/` and purge caches.
 
 ## Installing via uploaded ZIP file ##
 
-1. Log in to your Moodle site as an admin and go to _Site administration >
+1. Download `quicktranslate.zip` from the latest GitHub release. Do not use the
+   "Download ZIP" button on the repository page: that archive's root directory is
+   `moodle-tool_quicktranslate-main`, and Moodle's installer requires it to be
+   `quicktranslate`, so the upload is refused with `rootdirinvalid`. To build the
+   ZIP yourself from a checkout: `git archive --prefix=quicktranslate/ -o quicktranslate.zip HEAD`.
+2. Log in to your Moodle site as an admin and go to _Site administration >
    Plugins > Install plugins_.
-2. Upload the ZIP file with the plugin code. You should only be prompted to add
+3. Upload the ZIP file with the plugin code. You should only be prompted to add
    extra details if your plugin type is not automatically detected.
-3. Check the plugin validation report and finish the installation.
+4. Check the plugin validation report and finish the installation.
 
 ## Installing manually ##
 
